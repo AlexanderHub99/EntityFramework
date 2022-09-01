@@ -1,0 +1,7 @@
+{
+  "profiles": {
+    "EntityFrameworkWork": {
+      "commandName": "Project"
+    }
+  }
+}
