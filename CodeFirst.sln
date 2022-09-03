@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkWork", "Enti
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EFCore", "EFCore\EFCore.csproj", "{01EA98F3-F780-46DB-A5E2-281994305E17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DBFirstApp", "DBFirstApp\DBFirstApp.csproj", "{6F9914FC-45E2-4103-9212-29C45F6B7485}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBFirstApp", "DBFirstApp\DBFirstApp.csproj", "{6F9914FC-45E2-4103-9212-29C45F6B7485}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseManagement", "DatabaseManagement\DatabaseManagement.csproj", "{8AAC16F5-77DE-4907-B2A9-4726A078C95F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseManagement", "DatabaseManagement\DatabaseManagement.csproj", "{8AAC16F5-77DE-4907-B2A9-4726A078C95F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUD", "CRUD\CRUD.csproj", "{8BB8BE91-A625-4279-AB15-E664380BE6AD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{8AAC16F5-77DE-4907-B2A9-4726A078C95F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8AAC16F5-77DE-4907-B2A9-4726A078C95F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8AAC16F5-77DE-4907-B2A9-4726A078C95F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

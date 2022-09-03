@@ -1,4 +1,6 @@
-﻿using EFCore.Models;
+﻿using System;
+using System.Linq;
+using EFCore.Models;
 
 Console.WriteLine("Hello, World!");
 
