@@ -11,7 +11,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DBFirstApp", "DBFirstApp\DB
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseManagement", "DatabaseManagement\DatabaseManagement.csproj", "{8AAC16F5-77DE-4907-B2A9-4726A078C95F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CRUD", "CRUD\CRUD.csproj", "{8BB8BE91-A625-4279-AB15-E664380BE6AD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRUD", "CRUD\CRUD.csproj", "{8BB8BE91-A625-4279-AB15-E664380BE6AD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConnectionСonfiguration", "ConnectionСonfiguration\ConnectionСonfiguration.csproj", "{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8BB8BE91-A625-4279-AB15-E664380BE6AD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
