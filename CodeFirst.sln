@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CRUD", "CRUD\CRUD.csproj", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConnectionСonfiguration", "ConnectionСonfiguration\ConnectionСonfiguration.csproj", "{8D6BC577-2313-47F3-8BAB-FE23B41AD1AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoggingOperations", "LoggingOperations\LoggingOperations.csproj", "{6D13DE58-5E58-426A-8E88-980F019C8B78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingOperations", "LoggingOperations\LoggingOperations.csproj", "{6D13DE58-5E58-426A-8E88-980F019C8B78}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSchemaManagementAndMigration", "DatabaseSchemaManagementAndMigration\DatabaseSchemaManagementAndMigration.csproj", "{24C6915E-E265-4424-82B7-01B38FEBE978}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{6D13DE58-5E58-426A-8E88-980F019C8B78}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6D13DE58-5E58-426A-8E88-980F019C8B78}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6D13DE58-5E58-426A-8E88-980F019C8B78}.Release|Any CPU.Build.0 = Release|Any CPU
+		{24C6915E-E265-4424-82B7-01B38FEBE978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24C6915E-E265-4424-82B7-01B38FEBE978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24C6915E-E265-4424-82B7-01B38FEBE978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24C6915E-E265-4424-82B7-01B38FEBE978}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
