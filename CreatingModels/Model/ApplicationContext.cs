@@ -1,19 +1,29 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace LoggingOperations.Model
+namespace CreatingModels.Model
 {
-    internal class DbUserContext : DbContext
+    internal class ApplicationContext : DbContext
     {
         public DbSet<User> Users { get; set; } = null!;
 
         //Создаем файл для записи логов 
         private readonly StreamWriter logStream = new StreamWriter("mylog.txt", true);
 
-        public DbUserContext(DbContextOptions<DbUserContext> options) : base(options)
+        public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
+
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            // использование Fluent API
+            base.OnModelCreating(modelBuilder);
+            //Один из способов сопоставления модели с базой данных
+            modelBuilder.Ignore<Company>();
+
+            //Игнорирует создание столбца  в дб
+            modelBuilder.Entity<User>().Ignore(u => u.Age);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

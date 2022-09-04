@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoggingOperations", "Loggin
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseSchemaManagementAndMigration", "DatabaseSchemaManagementAndMigration\DatabaseSchemaManagementAndMigration.csproj", "{24C6915E-E265-4424-82B7-01B38FEBE978}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CreatingModels", "CreatingModels\CreatingModels.csproj", "{DED320CB-CF49-4E51-A64A-8DF6B8EE86E1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{24C6915E-E265-4424-82B7-01B38FEBE978}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24C6915E-E265-4424-82B7-01B38FEBE978}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24C6915E-E265-4424-82B7-01B38FEBE978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DED320CB-CF49-4E51-A64A-8DF6B8EE86E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DED320CB-CF49-4E51-A64A-8DF6B8EE86E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DED320CB-CF49-4E51-A64A-8DF6B8EE86E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DED320CB-CF49-4E51-A64A-8DF6B8EE86E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
