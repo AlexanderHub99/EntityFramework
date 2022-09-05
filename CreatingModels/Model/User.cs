@@ -11,9 +11,13 @@ namespace CreatingModels.Model
 {
     internal class User
     {
+        [Key]                                  // Для установки свойства в качестве первичного ключа с помощью аннотаций
+                                               // применяется атрибут [Key]:
         [Column("user_Id")]               // Устатавлевает имя колонки в ДБ и указывает с какой колонки брать
                                           // данные для создания обекта 
         public long Id { get; set; }           // Свойство обязательно к заполнению (заполняется автоматически )
+                                               // По умолчанию в качестве ключа используется свойство, которое
+                                               // называется Id или [имя_класса]Id.Например: UserId
 
         [Column("user_Age")]              // Устатавлевает имя колонки в ДБ и указывает с какой колонки брать
                                           // данные для создания обекта 
@@ -29,5 +33,8 @@ namespace CreatingModels.Model
         public long CompanyId { get; set; }    // Свойство обязательно к заполнению (заполняется автоматически )
 
         public Company? Company { get; set; }  // Свойство Company будет не обязательно дя дб и может иметь состояние  nullable
+
+        public string? PassportSeria { get; set; }
+        public string? PassportNumber { get; set; }
     }
 }

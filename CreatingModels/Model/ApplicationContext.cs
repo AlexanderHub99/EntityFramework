@@ -23,8 +23,24 @@ namespace CreatingModels.Model
             modelBuilder.Entity<User>().Ignore(u => u.Age);   // Игнорирует создание столбца  в дб
 
             // Указывает, что данное свойство обязательно для установки, то есть будет иметь определение NOT NULL в БД,
-            //даже если оно представляет nullable-тип:
+            // Даже если оно представляет nullable-тип:
             modelBuilder.Entity<User>().Property(b => b.Name).IsRequired();
+
+            modelBuilder.Entity<User>().HasKey(u => u.Id);    // Для конфигурации ключа с Fluent API применяется метод
+                                                              // HasKey(): устанавливает поле как ключ в Базе Данных
+
+            // Дополнительно с помощью Fluent API можно настроить имя ограничения, которое задается для первичного ключа.
+            // Для этого применяется метод HasName():
+            modelBuilder.Entity<User>().HasKey(u => u.Id).HasName("UsersPrimaryKey");
+
+            // С помощью Fluent API можно создать составной ключ из нескольких свойств:
+            modelBuilder.Entity<User>().HasKey(u => new { u.PassportSeria, u.PassportNumber });
+
+            // Для установки альтернативного ключа используется метод HasAlternateKey():
+            modelBuilder.Entity<Company>().HasAlternateKey(u => u.Passport);
+
+            // Альтернативные ключи также могут быть составными:
+            modelBuilder.Entity<Company>().HasAlternateKey(u => new { u.Passport, u.Name });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

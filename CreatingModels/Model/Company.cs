@@ -3,8 +3,11 @@
     internal class Company
     {
         public int Id { get; set; }
+
         public string? Name { get; set; }
 
         public long UserId { get; set; }
+
+        public string? Passport { get; set; }
     }
 }
