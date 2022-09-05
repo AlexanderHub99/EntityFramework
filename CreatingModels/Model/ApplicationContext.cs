@@ -20,27 +20,28 @@ namespace CreatingModels.Model
             base.OnModelCreating(modelBuilder);               // Использование Fluent API
             modelBuilder.Ignore<Company>();                   // Один из способов сопоставления модели с базой данных
 
-            modelBuilder.Entity<User>().Ignore(u => u.Age);   // Игнорирует создание столбца  в дб
+            modelBuilder.Entity<User>()                       // Игнорирует создание столбца  в дб
+                .Ignore(u => u.Age);
 
-            // Указывает, что данное свойство обязательно для установки, то есть будет иметь определение NOT NULL в БД,
-            // Даже если оно представляет nullable-тип:
-            modelBuilder.Entity<User>().Property(b => b.Name).IsRequired();
+            modelBuilder.Entity<User>()                       // Указывает, что данное свойство обязательно для установки,
+                .Property(b => b.Name).IsRequired();          // то есть будет иметь определение NOT NULL в БД,
+                                                              // Даже если оно представляет nullable-тип:
 
-            modelBuilder.Entity<User>().HasKey(u => u.Id);    // Для конфигурации ключа с Fluent API применяется метод
-                                                              // HasKey(): устанавливает поле как ключ в Базе Данных
+            modelBuilder.Entity<User>()                       // Для конфигурации ключа с Fluent API применяется метод
+                .HasKey(u => u.Id);                           // HasKey(): устанавливает поле как ключ в Базе Данных
 
-            // Дополнительно с помощью Fluent API можно настроить имя ограничения, которое задается для первичного ключа.
-            // Для этого применяется метод HasName():
-            modelBuilder.Entity<User>().HasKey(u => u.Id).HasName("UsersPrimaryKey");
+            modelBuilder.Entity<User>()                       // Дополнительно с помощью Fluent API можно настроить имя
+                .HasKey(u => u.Id).HasName("UsersPrimaryKey");// ограничения, которое задается для первичного ключа.
+                                                              // Для этого применяется метод HasName():
 
-            // С помощью Fluent API можно создать составной ключ из нескольких свойств:
-            modelBuilder.Entity<User>().HasKey(u => new { u.PassportSeria, u.PassportNumber });
+            modelBuilder.Entity<User>()                       // С помощью Fluent API можно создать составной ключ из
+                .HasKey(u => new { u.PassportSeria, u.PassportNumber });// нескольких свойств:
 
-            // Для установки альтернативного ключа используется метод HasAlternateKey():
-            modelBuilder.Entity<Company>().HasAlternateKey(u => u.Passport);
+            modelBuilder.Entity<Company>()                     // Для установки альтернативного ключа используется метод
+                .HasAlternateKey(u => u.Passport);             // HasAlternateKey():
 
-            // Альтернативные ключи также могут быть составными:
-            modelBuilder.Entity<Company>().HasAlternateKey(u => new { u.Passport, u.Name });
+            modelBuilder.Entity<Company>()                     // Альтернативные ключи также могут быть составными:
+                .HasAlternateKey(u => new { u.Passport, u.Name });
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -48,8 +49,8 @@ namespace CreatingModels.Model
             // Логгирование в окно Output
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message), LogLevel.Information);
 
-            // Записывает логи в (mylog.txt) Храниться в корневой папке проекта CodeFirst\LoggingOperations\bin\Debug\net6.0
-            optionsBuilder.LogTo(logStream.WriteLine);
+            optionsBuilder.LogTo(logStream.WriteLine);         // Записывает логи в (mylog.txt) Храниться в корневой папке
+                                                               // проекта CodeFirst\LoggingOperations\bin\Debug\net6.0
         }
 
         /// <summary>
