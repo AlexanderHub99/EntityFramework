@@ -1,20 +1,33 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿//По умолчанию свойство является необязательным к установке, если оно допускает значение null.
+//Это свойства, которые представляют nullable-типы, например, string?, int? и т.д. Хотя мы
+//также можем настроить эти свойства как обязательные.
+//Свойство является обязательным, если оно не допускает значение null.
+
+
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CreatingModels.Model
 {
     internal class User
     {
-        [Column("user_Id")]
-        public long Id { get; set; }
+        [Column("user_Id")]               // Устатавлевает имя колонки в ДБ и указывает с какой колонки брать
+                                          // данные для создания обекта 
+        public long Id { get; set; }           // Свойство обязательно к заполнению (заполняется автоматически )
 
-        [Column("user_Name")]
-        public string? Name { get; set; }
+        [Column("user_Age")]              // Устатавлевает имя колонки в ДБ и указывает с какой колонки брать
+                                          // данные для создания обекта 
+        public int Age { get; set; }           // Свойство обязательно к заполнению (заполняется автоматически )
 
-        [Column("user_Age")]
-        public int Age { get; set; }
+        [Required]                             // Атрибут Required указывает, что данное свойство обязательно для
+                                               // установки, то есть будет иметь определение NOT NULL в БД, даже
+                                               // если оно представляет nullable-тип:
+        [Column("user_Name")]             // Устатавлевает имя колонки в ДБ и указывает с какой колонки брать
+                                          // данные для создания обекта 
+        public string? Name { get; set; }      // Свойство Name будет не обязательно дя дб и может иметь состояние  nullable
 
-        public long CompanyId { get; set; }
+        public long CompanyId { get; set; }    // Свойство обязательно к заполнению (заполняется автоматически )
 
-        public Company? Company { get; set; }
+        public Company? Company { get; set; }  // Свойство Company будет не обязательно дя дб и может иметь состояние  nullable
     }
 }

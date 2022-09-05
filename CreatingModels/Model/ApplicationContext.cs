@@ -7,7 +7,7 @@ namespace CreatingModels.Model
     {
         public DbSet<User> Users { get; set; } = null!;
 
-        //Создаем файл для записи логов 
+        // Создаем файл для записи логов 
         private readonly StreamWriter logStream = new StreamWriter("mylog.txt", true);
 
         public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
@@ -17,20 +17,22 @@ namespace CreatingModels.Model
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            // использование Fluent API
-            base.OnModelCreating(modelBuilder);
-            //Один из способов сопоставления модели с базой данных
-            modelBuilder.Ignore<Company>();
+            base.OnModelCreating(modelBuilder);               // Использование Fluent API
+            modelBuilder.Ignore<Company>();                   // Один из способов сопоставления модели с базой данных
 
-            //Игнорирует создание столбца  в дб
-            modelBuilder.Entity<User>().Ignore(u => u.Age);
+            modelBuilder.Entity<User>().Ignore(u => u.Age);   // Игнорирует создание столбца  в дб
+
+            // Указывает, что данное свойство обязательно для установки, то есть будет иметь определение NOT NULL в БД,
+            //даже если оно представляет nullable-тип:
+            modelBuilder.Entity<User>().Property(b => b.Name).IsRequired();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             // Логгирование в окно Output
             optionsBuilder.LogTo(message => System.Diagnostics.Debug.WriteLine(message), LogLevel.Information);
-            //Записывает логи в (mylog.txt) Храниться в корневой папке проекта CodeFirst\LoggingOperations\bin\Debug\net6.0
+
+            // Записывает логи в (mylog.txt) Храниться в корневой папке проекта CodeFirst\LoggingOperations\bin\Debug\net6.0
             optionsBuilder.LogTo(logStream.WriteLine);
         }
 
