@@ -42,6 +42,33 @@ namespace CreatingModels.Model
 
             modelBuilder.Entity<Company>()                     // Альтернативные ключи также могут быть составными:
                 .HasAlternateKey(u => new { u.Passport, u.Name });
+
+            modelBuilder.Entity<Phone>()                       // Для создания индекса через Fluent API применяется
+                .HasIndex(u => u.Passport);                    // метод HasIndex():
+
+            modelBuilder.Entity<Phone>()                       // С помощью дополнительного метода IsUnique() можно
+                 .HasIndex(u => u.Passport).IsUnique();        // указать, что индекс должен иметь уникальное значение.
+                                                               // Тем самым мы гарантируем, что в базе данных может
+                                                               // быть только один объект с определенным значением
+                                                               // для свойства-индекса:
+
+            modelBuilder.Entity<Phone>()                       // Также можно определить индексы сразу для нескольких свойств:
+                .HasIndex(u => new { u.Passport, u.PhoneNumber });
+
+            modelBuilder.Entity<Phone>()
+                .HasIndex(u => u.PhoneNumber)                  // Для установки имени индекса применяется метод 
+                .HasDatabaseName("PhoneIndex");           // HasDatabaseName(), в который передается имя индекса:
+
+            modelBuilder.Entity<Phone>()                       // Некоторые системы управления базами данных позволяют
+                .HasIndex(u => u.PhoneNumber)                  // определять индексы с фильрами или частичные индексы,
+                .HasFilter("[PhoneNumber] IS NOT NULL");   // которые позволяют выполнять индексацию только по
+                                                           // ограниченному набору значений, что увеличивает
+                                                           // производительность и уменьшает использование дискового
+                                                           // простанства. И EntityFramework Core также позволяет
+                                                           // создавать подобные индексы. Для этого применяется метод
+                                                           // HasFilter(), в который передается sql-выражение, которое
+                                                           // определяет условие фильтра. Например:
+
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
