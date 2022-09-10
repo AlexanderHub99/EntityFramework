@@ -34,9 +34,9 @@ using (ApplicationContext db = new ApplicationContext())
     db.Companies.AddRange(company1, company2);  // добавление компаний
     db.SaveChanges();
 
-    User user1 = new User { Name = "Tom", CompanyId = company1.Id };
-    User user2 = new User { Name = "Bob", CompanyId = company1.Id };
-    User user3 = new User { Name = "Sam", CompanyId = company2.Id };
+    User user1 = new User { Name = "Tom", CompanyInfoKey = company1.Id };
+    User user2 = new User { Name = "Bob", CompanyInfoKey = company1.Id };
+    User user3 = new User { Name = "Sam", CompanyInfoKey = company2.Id };
 
     db.Users.AddRange(user1, user2, user3);     // добавление пользователей
     db.SaveChanges();
