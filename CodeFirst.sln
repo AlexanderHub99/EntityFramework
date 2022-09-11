@@ -23,11 +23,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CreatingModels", "CreatingM
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GeneratingPropertyAndColumnValues", "GeneratingPropertyAndColumnValues\GeneratingPropertyAndColumnValues.csproj", "{560BC8EC-0FE5-49F8-B05D-063E3FEF5AA2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModelConfiguration", "ModelConfiguration\ModelConfiguration.csproj", "{FCB04D59-B31D-49C9-8537-DEA8FA6357B9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ModelConfiguration", "ModelConfiguration\ModelConfiguration.csproj", "{FCB04D59-B31D-49C9-8537-DEA8FA6357B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelationshipsBetweEntities", "RelationshipsBetweEntities\RelationshipsBetweEntities.csproj", "{533AE2A8-62CC-45A4-B219-FF9C73D1FA1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RelationshipsBetweEntities", "RelationshipsBetweEntities\RelationshipsBetweEntities.csproj", "{533AE2A8-62CC-45A4-B219-FF9C73D1FA1F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CascadingDelete", "CascadingDelete\CascadingDelete.csproj", "{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CascadingDelete", "CascadingDelete\CascadingDelete.csproj", "{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingRelatedDataMethod_Include", "LoadingRelatedDataMethod_Include\LoadingRelatedDataMethod_Include.csproj", "{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -87,6 +89,10 @@ Global
 		{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
