@@ -29,7 +29,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RelationshipsBetweEntities"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CascadingDelete", "CascadingDelete\CascadingDelete.csproj", "{BA3A1C72-1952-4F3B-A006-5D1F82A2CB9F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadingRelatedDataMethod_Include", "LoadingRelatedDataMethod_Include\LoadingRelatedDataMethod_Include.csproj", "{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadingRelatedDataMethod_Include", "LoadingRelatedDataMethod_Include\LoadingRelatedDataMethod_Include.csproj", "{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExplicitLoading", "ExplicitLoading\ExplicitLoading.csproj", "{5AD5A272-E25B-4151-B9A0-C55924315AAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -93,6 +95,10 @@ Global
 		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5AD5A272-E25B-4151-B9A0-C55924315AAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5AD5A272-E25B-4151-B9A0-C55924315AAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5AD5A272-E25B-4151-B9A0-C55924315AAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5AD5A272-E25B-4151-B9A0-C55924315AAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
