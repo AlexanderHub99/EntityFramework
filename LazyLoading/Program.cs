@@ -1,26 +1,27 @@
 ﻿using LazyLoading.Model;
+using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
 
 using (ApplicationContext db = new ApplicationContext())
 {
     // пересоздадим базу данных
-    db.Database.EnsureDeleted();
-    db.Database.EnsureCreated();
+    await db.Database.EnsureDeletedAsync();
+    await db.Database.EnsureCreatedAsync();
 
     // добавляем начальные данные
-    Company microsoft = new Company { Name = "Microsoft" };
     Company google = new Company { Name = "Google"};
-    db.Companies.AddRange(microsoft, google);
+    Company microsoft = new Company { Name = "Microsoft" };
+    await db.Companies.AddRangeAsync(microsoft, google);
 
 
-    User tom = new User { Name = "Tom", Company = microsoft };
     User bob = new User { Name = "Bob", Company = google };
-    User alice = new User { Name = "Alice", Company = microsoft };
     User kate = new User { Name = "Kate", Company = google };
-    db.Users.AddRange(tom, bob, alice, kate);
+    User tom = new User { Name = "Tom", Company = microsoft };
+    User alice = new User { Name = "Alice", Company = microsoft };
+    await db.Users.AddRangeAsync(tom, bob, alice, kate);
 
-    db.SaveChanges();
+    await db.SaveChangesAsync();
 }
 using (ApplicationContext db = new ApplicationContext())
 {
@@ -28,7 +29,7 @@ using (ApplicationContext db = new ApplicationContext())
     // В базе данных выполняется sql-команда:
     // SELECT "u"."Id", "u"."CompanyId", "u"."Name"
     // FROM "Users" AS "u"
-    var users = db.Users.ToList();
+    var users = await db.Users.ToListAsync();
 
     // Далее в цикле перебираем всех полученных пользователей и обращаемся к навигационному
     // свойству Company для получения связанной компании:
@@ -64,13 +65,16 @@ using (ApplicationContext db = new ApplicationContext())
 // Таким же образом можно загрузить компании и связанных с ними пользователей:
 using (ApplicationContext db = new ApplicationContext())
 {
-    var companies = db.Companies.ToList();
+    var companies = await db.Companies.ToListAsync();
     foreach (Company company in companies)
     {
         Console.Write($"{company.Name}:");
+
         foreach (User user in company.Users)
+        {
             Console.Write($"{user.Name} ");
-        Console.WriteLine();
+            Console.WriteLine();
+        }
     }
 
     //Однако при использовании lazy loading следует учитывать что если в базе данных произошли какие-нибудь изменения,
