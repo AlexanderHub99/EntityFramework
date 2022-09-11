@@ -23,9 +23,10 @@ using (ApplicationContext db = new ApplicationContext())
 
     await db.SaveChangesAsync();
 }
+
 using (ApplicationContext db = new ApplicationContext())
 {
-    Company? company = db.Companies.FirstOrDefault();
+    Company? company = await db.Companies.FirstOrDefaultAsync();
     if (company != null)
     {
         // Выражение db.Users.Where(p=>p.CompanyId==company.Id).Load() загружает пользователей в контекст.
@@ -46,7 +47,7 @@ using (ApplicationContext db = new ApplicationContext())
 
 using (ApplicationContext db = new ApplicationContext())
 {
-    Company? company = db.Companies.FirstOrDefault();
+    Company? company = await db.Companies.FirstOrDefaultAsync();
     if (company != null)
     {
         // Для загрузки связанных данных мы также можем использовать методы Collection() и Reference. Метод Collection
@@ -61,7 +62,7 @@ using (ApplicationContext db = new ApplicationContext())
 
 using (ApplicationContext db = new ApplicationContext())
 {
-    User? user = db.Users.FirstOrDefault();  // получаем первого пользователя
+    User? user = await db.Users.FirstOrDefaultAsync();  // получаем первого пользователя
     if (user != null)
     {
         db.Entry(user).Reference(u => u.Company).Load();   // Получаем компанию в которой работает пользователь
