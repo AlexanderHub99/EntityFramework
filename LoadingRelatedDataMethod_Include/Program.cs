@@ -39,7 +39,7 @@ using (ApplicationContext db = new ApplicationContext())
 
 using (ApplicationContext ctx = new ApplicationContext())
 {
-    var companies = ctx.Companies.ToList();
+    var companies = await ctx.Companies.ToListAsync();
 
     var users = await ctx.Users
        // Использование бессмысленно так как в контекст уже загружены данные
@@ -58,9 +58,9 @@ using (ApplicationContext ctx = new ApplicationContext())
 // получить связанные данные, нам необходимо использовать метод Include.
 using (ApplicationContext db = new ApplicationContext())
 {
-    var users = db.Users
+    var users = await db.Users
         .Include(u => u.Company)  // добавляем данные по компаниям
-        .ToList();
+        .ToListAsync();
 
     foreach (var user in users)
         Console.WriteLine($"{user.Name} - {user.Company?.Name}");
@@ -69,9 +69,9 @@ using (ApplicationContext db = new ApplicationContext())
 
 using (ApplicationContext db = new ApplicationContext())
 {
-    var companies = db.Companies
+    var companies = await db.Companies
                     .Include(c => c.Users)  // добавляем данные по пользователям
-                    .ToList();
+                    .ToListAsync();
     foreach (var company in companies)
     {
         Console.WriteLine(company.Name);
@@ -87,26 +87,26 @@ using (ApplicationContext db = new ApplicationContext())
 using (ApplicationContext db = new ApplicationContext())
 {
     // пересоздадим базу данных
-    db.Database.EnsureDeleted();
-    db.Database.EnsureCreated();
+    await db.Database.EnsureDeletedAsync();
+    await db.Database.EnsureCreatedAsync();
 
     Country usa = new Country { Name = "USA" };
     Country japan = new Country { Name = "Japan" };
-    db.Countries.AddRange(usa, japan);
+    await db.Countries.AddRangeAsync(usa, japan);
 
     // добавляем начальные данные
     Company2 microsoft = new Company2 { Name = "Microsoft", Country = usa };
     Company2 sony = new Company2 { Name = "Sony", Country = japan };
-    db.Companies2.AddRange(microsoft, sony);
+    await db.Companies2.AddRangeAsync(microsoft, sony);
 
 
     User2 tom = new User2 { Name = "Tom", Company2 = microsoft };
     User2 bob = new User2 { Name = "Bob", Company2 = sony };
     User2 alice = new User2 { Name = "Alice", Company2 = microsoft };
     User2 kate = new User2 { Name = "Kate", Company2 = sony };
-    db.User2s.AddRange(tom, bob, alice, kate);
+    await db.User2s.AddRangeAsync(tom, bob, alice, kate);
 
-    db.SaveChanges();
+    await db.SaveChangesAsync();
 }
 // ThenInclude
 // Допустим, вместе с пользователями мы хотим загрузить и страны, в которых базируются компании пользователей.
@@ -116,10 +116,10 @@ using (ApplicationContext db = new ApplicationContext())
 using (ApplicationContext db = new ApplicationContext())
 {
     // получаем пользователей
-    var users = db.User2s
+    var users = await db.User2s
         .Include(u => u.Company2)  // подгружаем данные по компаниям
             .ThenInclude(c => c!.Country)    // к компаниям подгружаем данные по странам
-        .ToList();
+        .ToListAsync();
     foreach (var user in users)
         Console.WriteLine($"{user.Name} - {user.Company2?.Name} - {user.Company2?.Country?.Name}");
 }
@@ -127,9 +127,9 @@ using (ApplicationContext db = new ApplicationContext())
 // Также мы можем использовать тот же метод Include для загрузки данных далее по цепочке:
 using (ApplicationContext db = new ApplicationContext())
 {
-    var users = db.User2s
+    var users = await db.User2s
         .Include(u => u.Company2!.Country)
-        .ToList();
+        .ToListAsync();
     foreach (var user in users)
         Console.WriteLine($"{user.Name} - {user.Company2?.Name} - {user.Company2?.Country!.Name}");
 }
@@ -137,40 +137,40 @@ using (ApplicationContext db = new ApplicationContext())
 using (ApplicationContext db = new ApplicationContext())
 {
     // пересоздадим базу данных
-    db.Database.EnsureDeleted();
-    db.Database.EnsureCreated();
+    await db.Database.EnsureDeletedAsync();
+    await db.Database.EnsureCreatedAsync();
 
     Position manager = new Position { Name = "Manager" };
     Position developer = new Position { Name = "Developer" };
-    db.Positions.AddRange(manager, developer);
+    await db.Positions.AddRangeAsync(manager, developer);
 
     City washington = new City { Name = "Washington" };
-    db.Cities.Add(washington);
+    await db.Cities.AddAsync(washington);
 
     Country2 usa = new Country2 { Name = "USA", Capital = washington };
-    db.Countries2.Add(usa);
+    await db.Countries2.AddAsync(usa);
 
     Company3 microsoft = new Company3 { Name = "Microsoft", Country = usa };
     Company3 google = new Company3 { Name = "Google", Country = usa };
-    db.Companies3.AddRange(microsoft, google);
+    await db.Companies3.AddRangeAsync(microsoft, google);
 
     User3 tom = new User3 { Name = "Tom", Company3 = microsoft, Position = manager };
     User3 bob = new User3 { Name = "Bob", Company3 = google, Position = developer };
     User3 alice = new User3 { Name = "Alice", Company3 = microsoft, Position = developer };
     User3 kate = new User3 { Name = "Kate", Company3 = google, Position = manager };
-    db.Users3.AddRange(tom, bob, alice, kate);
+    await db.Users3.AddRangeAsync(tom, bob, alice, kate);
 
-    db.SaveChanges();
+    await db.SaveChangesAsync();
 }
 using (ApplicationContext db = new ApplicationContext())
 {
     // получаем пользователей
-    var users = db.Users3
+    var users = await db.Users3
                     .Include(u => u.Company3)  // добавляем данные по компаниям
                         .ThenInclude(comp => comp!.Country)      // к компании добавляем страну 
                             .ThenInclude(count => count!.Capital)    // к стране добавляем столицу
                     .Include(u => u.Position) // добавляем данные по должностям
-                    .ToList();
+                    .ToListAsync();
     foreach (var user in users)
     {
         Console.WriteLine($"{user.Name} - {user.Position?.Name}");
