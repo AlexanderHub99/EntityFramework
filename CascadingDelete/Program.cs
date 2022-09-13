@@ -2,7 +2,7 @@
 
 Console.WriteLine("Hello, World!");
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // добавляем начальные данные
     Company microsoft = new Company { Name = "Microsoft" };

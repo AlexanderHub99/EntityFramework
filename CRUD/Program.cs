@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 Console.WriteLine("Hello, World!");
 
 // Добавление
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     User tom1 = new User { Name = "Tom", Age = 33, Femali = "Ferstan" };
     User tom2 = new User { Name = "Tom1", Age = 3324, Femali = "Ferstan1" };
@@ -19,7 +19,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // получение
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // получаем объекты из бд и выводим на консоль
     var users = await db.Users.ToListAsync();
@@ -31,7 +31,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // Редактирование
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // получаем первый объект
     User? user = await db.Users.FirstOrDefaultAsync();
@@ -53,7 +53,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // Удаление
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // получаем первый объект
     User? user1 = await db.Users.FirstOrDefaultAsync();

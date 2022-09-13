@@ -6,7 +6,7 @@ namespace ConnectionСonfiguration.Model
     {
         public DbSet<User> Users { get; set; } = null!;
 
-        private string connectionString;
+        private readonly string connectionString;
 
         /// <summary>
         /// Установка конфигурации в конструкторе
