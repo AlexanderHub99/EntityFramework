@@ -31,9 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CascadingDelete", "Cascadin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadingRelatedDataMethod_Include", "LoadingRelatedDataMethod_Include\LoadingRelatedDataMethod_Include.csproj", "{08C15EE0-5113-4048-9D1C-FD0DA2932CF7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExplicitLoading", "ExplicitLoading\ExplicitLoading.csproj", "{5AD5A272-E25B-4151-B9A0-C55924315AAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExplicitLoading", "ExplicitLoading\ExplicitLoading.csproj", "{5AD5A272-E25B-4151-B9A0-C55924315AAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyLoading", "LazyLoading\LazyLoading.csproj", "{F9816A98-324C-4FDF-BDB2-2D1B83F8198E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LazyLoading", "LazyLoading\LazyLoading.csproj", "{F9816A98-324C-4FDF-BDB2-2D1B83F8198E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OneToManyRelationship", "OneToManyRelationship\OneToManyRelationship.csproj", "{B1F3800C-132D-4C84-9210-F26AB65B3E09}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -105,6 +107,10 @@ Global
 		{F9816A98-324C-4FDF-BDB2-2D1B83F8198E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9816A98-324C-4FDF-BDB2-2D1B83F8198E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9816A98-324C-4FDF-BDB2-2D1B83F8198E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F3800C-132D-4C84-9210-F26AB65B3E09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F3800C-132D-4C84-9210-F26AB65B3E09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F3800C-132D-4C84-9210-F26AB65B3E09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F3800C-132D-4C84-9210-F26AB65B3E09}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
