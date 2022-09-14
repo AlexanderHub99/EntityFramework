@@ -1,10 +1,8 @@
-﻿using System;
-using System.Linq;
-using EFCore.Models;
+﻿using EFCore.Models;
 
 Console.WriteLine("Hello, World!");
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // создаем два объекта User
     User tom = new User { Name = "Tom", Age = 33 };
@@ -22,6 +20,6 @@ using (ApplicationContext db = new ApplicationContext())
 
     foreach (User u in users)
     {
-            Console.WriteLine(value: $"{u.Id}.{u.Name} - {u.Age}");
+        Console.WriteLine(value: $"{u.Id}.{u.Name} - {u.Age}");
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Extensions.Configuration;
 
 Console.WriteLine("Hello, World!");
 
-using (User1Context db = new User1Context())
+using (User1Context db = new())
 {
     User user1 = new User { Name = "Sasha1", Age = 23 };
     User user2 = new User { Name = "Sasha2", Age = 34 };
@@ -23,7 +23,7 @@ using (User1Context db = new User1Context())
     }
 }
 
-using (User2Context db = new User2Context("Data Source=TestUser2.db"))
+using (User2Context db = new("Data Source=TestUser2.db"))
 {
     Console.WriteLine("\nВторой вариант подключения к DB");
 
@@ -39,7 +39,7 @@ using (User2Context db = new User2Context("Data Source=TestUser2.db"))
 ///параметр в конструктор базового класса.
 var optionsBuilder = new DbContextOptionsBuilder<User3Context>();
 var options = optionsBuilder.UseSqlite("Data Source=TestUser2.db").Options;
-using (User3Context db = new User3Context(options))
+using (User3Context db = new(options))
 {
     Console.WriteLine("\nТретий вариант подключения к DB");
 
@@ -63,7 +63,7 @@ string connectionString = config.GetConnectionString("DefaultConnection");
 
 var optionsBuilder1 = new DbContextOptionsBuilder<User4Context>();
 var options1 = optionsBuilder1.UseSqlite(connectionString).Options;
-using (User4Context db = new User4Context(options1))
+using (User4Context db = new(options1))
 {
     Console.WriteLine("\nЧетвертый вариант подключения к DB");
 

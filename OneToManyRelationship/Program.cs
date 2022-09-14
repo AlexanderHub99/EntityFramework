@@ -4,7 +4,7 @@ using OneToManyRelationship.Model;
 Console.WriteLine("Hello, World!");
 
 // Adding data:
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // пересоздадим базу данных
     db.Database.EnsureDeleted();
@@ -23,7 +23,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // Getting data:
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // вывод пользователей
     var users = db.Users.Include(u => u.Company).ToList();
@@ -43,7 +43,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // Editing:
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // изменение имени пользователя
     User? user1 = db.Users.FirstOrDefault(p => p.Name == "Tom");
@@ -70,7 +70,7 @@ using (ApplicationContext db = new ApplicationContext())
 }
 
 // Removal:
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     User? user = db.Users.FirstOrDefault(u => u.Name == "Bob");
     if (user != null)

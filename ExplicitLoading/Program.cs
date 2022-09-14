@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 Console.WriteLine("Hello, World!");
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     // пересоздадим базу данных
     await db.Database.EnsureDeletedAsync();
@@ -24,7 +24,7 @@ using (ApplicationContext db = new ApplicationContext())
     await db.SaveChangesAsync();
 }
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     Company? company = await db.Companies.FirstOrDefaultAsync();
     if (company != null)

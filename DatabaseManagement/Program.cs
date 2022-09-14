@@ -3,7 +3,7 @@ using DatabaseManagement.Models;
 
 Console.WriteLine("Hello, World!");
 
-using (ApplicationContext context = new ApplicationContext())
+using (ApplicationContext context = new())
 {
     var isCreated = context.Database.EnsureCreated();
     Console.WriteLine(Script.IsCreated(isCreated));

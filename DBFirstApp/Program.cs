@@ -2,7 +2,7 @@
 
 Console.WriteLine("Hello, World!");
 
-using (helloappContext db = new helloappContext())
+using (helloappContext db = new())
 {
     // получаем объекты из бд и выводим на консоль
     var users = db.Users.ToList();

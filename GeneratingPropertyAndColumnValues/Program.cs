@@ -5,7 +5,7 @@ Console.WriteLine("Hello, World!");
 // По умолчанию для свойств первичных ключей, которые представляют типы int или GUID и которые имеют значение
 // по умолчанию, генерируется значение при вставке в базу данных. Для всех остальных свойств значения по
 // умолчанию не генерируется.
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     User user = new User { Name = "Tom" };
     Console.WriteLine($"Id перед добавлением в контекст {user.Id}");    // Id = 0
@@ -16,7 +16,7 @@ using (ApplicationContext db = new ApplicationContext())
 
 // В этом случае, если мы не укажем значение для свойства Age, то ему будет присвоено значение 18:
 // Авто значение в ApplicationContext
-using (ApplicationContext db = new ApplicationContext())    // На уровне базы данных это будет проявляться в установке
+using (ApplicationContext db = new())    // На уровне базы данных это будет проявляться в установке
 {                                                           // параметра DEFAULT:
     User user1 = new User() { Name = "Tom"};                // CREATE TABLE "Users" (
     Console.WriteLine($"Age: {user1.Age}"); // 0      // "Id"    INTEGER NOT NULL,

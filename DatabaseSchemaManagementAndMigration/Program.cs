@@ -12,7 +12,7 @@ var connectionString = config.GetConnectionString("DefaultConnection");// пол
 
 var optionsBuilder1 = new DbContextOptionsBuilder<DbUserContext>();
 var options1 = optionsBuilder1.UseSqlite(connectionString).Options;
-using (DbUserContext db = new DbUserContext(options1))
+using (DbUserContext db = new(options1))
 {
     var Users = await db.Users.ToListAsync();
     var Car = await db.Car.ToListAsync();
