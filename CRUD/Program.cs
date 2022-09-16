@@ -6,12 +6,12 @@ Console.WriteLine("Hello, World!");
 // Добавление
 using (ApplicationContext db = new())
 {
-    User tom1 = new User { Name = "Tom", Age = 33, Femali = "Ferstan" };
-    User tom2 = new User { Name = "Tom1", Age = 3324, Femali = "Ferstan1" };
-    User tom3 = new User { Name = "Tom3", Age = 32343, Femali = "Ferstan3" };
-    User alice1 = new User { Name = "Alice", Age = 26, Femali = "Robinsen" };
-    User alice2 = new User { Name = "Alice2", Age = 236, Femali = "Robinsen2" };
-    User alice3 = new User { Name = "Alice3", Age = 926, Femali = "Robinsen3" };
+    User tom1 = new() { Name = "Tom", Age = 33, Femali = "Ferstan" };
+    User tom2 = new() { Name = "Tom1", Age = 3324, Femali = "Ferstan1" };
+    User tom3 = new() { Name = "Tom3", Age = 32343, Femali = "Ferstan3" };
+    User alice1 = new() { Name = "Alice", Age = 26, Femali = "Robinsen" };
+    User alice2 = new() { Name = "Alice2", Age = 236, Femali = "Robinsen2" };
+    User alice3 = new() { Name = "Alice3", Age = 926, Femali = "Robinsen3" };
 
     // Добавление
     await db.Users.AddRangeAsync(tom1, tom2, tom3, alice1, alice2, alice3);
