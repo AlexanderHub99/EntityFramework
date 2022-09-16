@@ -17,7 +17,7 @@ using (ApplicationContext db = new ApplicationContext())
 
     Course algorithms = new Course { Name = "Алгоритмы" };
     Course basics = new Course { Name = "Основы программирования" };
-    db.Users.AddRange(algorithms, basics);
+    db.Courses.AddRange(algorithms, basics);
 
     // добавляем к студентам курсы
     tom.Courses.Add(algorithms);
