@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OneToManyRelationship", "On
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManyToManyRelationship", "ManyToManyRelationship\ManyToManyRelationship.csproj", "{0ED2F50A-646E-4B3C-BDE1-3FE18E997D35}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ComplexTypes", "ComplexTypes\ComplexTypes.csproj", "{54052A81-DFCD-44EE-A29F-9305BF5E933F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComplexTypes", "ComplexTypes\ComplexTypes.csproj", "{54052A81-DFCD-44EE-A29F-9305BF5E933F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalData", "HierarchicalData\HierarchicalData.csproj", "{5635B594-E003-463C-8BBE-7FCD2F0720D2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{54052A81-DFCD-44EE-A29F-9305BF5E933F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{54052A81-DFCD-44EE-A29F-9305BF5E933F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{54052A81-DFCD-44EE-A29F-9305BF5E933F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
