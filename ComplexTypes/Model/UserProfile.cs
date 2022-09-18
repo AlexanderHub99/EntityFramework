@@ -1,9 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-
-namespace ComplexTypes.Model
+﻿namespace ComplexTypes.Model
 {
-
-    [Owned]
     public class UserProfile
     {
         public int Id { get; set; }
@@ -11,5 +7,7 @@ namespace ComplexTypes.Model
         public int Age { get; set; }
 
         public string? Name { get; set; }
+
+        public string? Surname { get; set; }
     }
 }

@@ -18,7 +18,7 @@ namespace ComplexTypes.Model
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             // Настройки связи можно использовать Fluent API, в частности, метод OwnsOne()
-            modelBuilder.Entity<User>().OwnsOne(u => u.Profile);
+            modelBuilder.Entity<User>().OwnsOne(typeof(UserProfile), "Profile");
         }
     }
 }
