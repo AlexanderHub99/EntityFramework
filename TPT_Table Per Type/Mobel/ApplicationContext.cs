@@ -14,5 +14,11 @@ namespace TPT_Table_Per_Type.Mobel
         {
             optionsBuilder.UseSqlite("Data Source=helloapp.db");
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Employee>().ToTable("Employees");
+            modelBuilder.Entity<Manager>().ToTable("Managers");
+        }
     }
 }
