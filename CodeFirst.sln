@@ -43,6 +43,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComplexTypes", "ComplexType
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalData", "HierarchicalData\HierarchicalData.csproj", "{5635B594-E003-463C-8BBE-7FCD2F0720D2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPH_TablePerHierarchy", "TPH_TablePerHierarchy\TPH_TablePerHierarchy.csproj", "{1B55725A-0C7A-4BCE-9439-AD242E49E30B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -129,6 +131,10 @@ Global
 		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5635B594-E003-463C-8BBE-7FCD2F0720D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
