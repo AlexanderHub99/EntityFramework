@@ -8,8 +8,6 @@ namespace ComplexTypes.Model
 
         public ApplicationContext()
         {
-            Database.EnsureDeleted();
-            Database.EnsureCreated();
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
