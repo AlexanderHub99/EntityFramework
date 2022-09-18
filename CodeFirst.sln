@@ -41,9 +41,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManyToManyRelationship", "M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ComplexTypes", "ComplexTypes\ComplexTypes.csproj", "{54052A81-DFCD-44EE-A29F-9305BF5E933F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HierarchicalData", "HierarchicalData\HierarchicalData.csproj", "{5635B594-E003-463C-8BBE-7FCD2F0720D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HierarchicalData", "HierarchicalData\HierarchicalData.csproj", "{5635B594-E003-463C-8BBE-7FCD2F0720D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPH_TablePerHierarchy", "TPH_TablePerHierarchy\TPH_TablePerHierarchy.csproj", "{1B55725A-0C7A-4BCE-9439-AD242E49E30B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPH_TablePerHierarchy", "TPH_TablePerHierarchy\TPH_TablePerHierarchy.csproj", "{1B55725A-0C7A-4BCE-9439-AD242E49E30B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPT_TablePerType", "TPT_Table Per Type\TPT_TablePerType.csproj", "{AC1F1893-80B3-4686-ADD6-0737187142E5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -135,6 +137,10 @@ Global
 		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1B55725A-0C7A-4BCE-9439-AD242E49E30B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC1F1893-80B3-4686-ADD6-0737187142E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC1F1893-80B3-4686-ADD6-0737187142E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC1F1893-80B3-4686-ADD6-0737187142E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC1F1893-80B3-4686-ADD6-0737187142E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
