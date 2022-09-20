@@ -315,3 +315,44 @@ using (ApplicationContext db = new ApplicationContext())
     Scripts.SplitСonsole();
 }
 
+// Объединение
+using (ApplicationContext db = new ApplicationContext())
+{
+    var users = db.Users.Where(u => u.Age < 30)
+        .Union(db.Users.Where(u=>u.Name!.Contains("Tom")));
+
+    Console.WriteLine("Вывод объединение:");
+    foreach (var user in users)
+    {
+        Console.WriteLine(user.Name);
+    }
+}
+
+// Пересечение
+using (ApplicationContext db = new ApplicationContext())
+{
+    // Чтобы найти пересечение выборок, то есть те элементы, которые присутствуют сразу в двух выборках,
+    // используется метод Intersect(). Например, выберем все пользователей, у которых возраст больше 30
+    // и в имени содержится подстрока "Tom":
+    var users = db.Users.Where(u => u.Age > 30)
+        .Intersect(db.Users.Where(u=>u.Name!.Contains("Tom")));
+
+    Console.WriteLine("Вывод Пересечение:");
+    foreach (var user in users)
+    {
+        Console.WriteLine(user.Name);
+    }
+}
+
+// Разность
+using (ApplicationContext db = new ApplicationContext())
+{
+    var selector1 = db.Users.Where(u => u.Age > 30); // 
+    var selector2 = db.Users.Where(u => u.Name!.Contains("Tom"));
+    // Если нам надо найти элементы первой выборки, которые отсутствуют во второй выборке, то мы можем
+    // использовать метод Except:
+    var users = selector1.Except(selector2);
+
+    foreach (var user in users)
+        Console.WriteLine(user.Name);
+}
