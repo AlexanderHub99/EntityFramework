@@ -326,6 +326,7 @@ using (ApplicationContext db = new ApplicationContext())
     {
         Console.WriteLine(user.Name);
     }
+    Scripts.SplitСonsole();
 }
 
 // Пересечение
@@ -342,6 +343,7 @@ using (ApplicationContext db = new ApplicationContext())
     {
         Console.WriteLine(user.Name);
     }
+    Scripts.SplitСonsole();
 }
 
 // Разность
@@ -354,5 +356,72 @@ using (ApplicationContext db = new ApplicationContext())
     var users = selector1.Except(selector2);
 
     foreach (var user in users)
+    {
         Console.WriteLine(user.Name);
+    }
+    Scripts.SplitСonsole();
+}
+
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    // Наличие элементов
+
+    // Метод Any() позволяет проверить, есть ли в базе данных элемент с определенными признаками, и если есть,
+    // то метод возвратит значение true. Например, проверим, есть ли в базе данных пользователи, которые работают
+    // в компании Google:
+    bool result1 = db.Users.Any(u=>u.Company!.Name=="Google");
+
+    Console.WriteLine(" Наличие элементов User.Company!.Name==Google");
+    Console.WriteLine(result1.ToString());
+
+    // Метод All() позволяет проверит, удовлетворяют ли все элементы в базе данных определенному критерию. Например,
+    // проверим, все ли пользователи работают в компании Microsoft
+    bool result2 = db.Users.All(u=>u.Company!.Name=="Microsoft");
+
+    Console.WriteLine("Удовлетворяют ли все элементы в базе данных определенному критерию User.Company!.Name==Google");
+    Console.WriteLine(result2.ToString());
+
+    // Количество элементов в выборке
+    // Метод Count() позволяет найти количество элементов в выборке:
+    int number1 = db.Users.Count();
+    // найдем кол-во пользователей, которые в имени содержат подстроку Tom
+    int number2 = db.Users.Count(u => u.Name!.Contains("Tom"));
+
+    Console.WriteLine("Количество элементов в выборке Users");
+    Console.WriteLine(number1);
+    Console.WriteLine("Количество элементов в выборке User.Name!.Contains(Tom)");
+    Console.WriteLine(number2);
+
+    // Минимальное, максимальное и среднее значения
+    // Для нахождения минимального, максимального и среднего значений по выборке применяются функции Min(), Max() и
+    // Average() соответственно. Найдем минимальный, максимальный и средний возраст пользователей:
+
+    // минимальный возраст
+    int minAge = db.Users.Min(u=>u.Age);
+    // максимальный возраст
+    int maxAge = db.Users.Max(u=>u.Age);
+    // средний возраст пользователей, которые работают в Microsoft
+    double avgAge = db.Users.Where(u=>u.Company!.Name=="Microsoft")
+                        .Average(p => p.Age);
+
+    Console.WriteLine("Минимальный возраст");
+    Console.WriteLine(minAge);
+    Console.WriteLine("Максимальный возраст");
+    Console.WriteLine(maxAge);
+    Console.WriteLine("Cредний возраст пользователей, которые работают в Microsoft");
+    Console.WriteLine(avgAge);
+
+    // Сумма значений
+    // Для получения суммы значений используется метод Sum():
+    // суммарный возраст всех пользователей 
+    int sum1 = db.Users.Sum(u => u.Age);
+    // суммарный возраст тех, кто работает в Microsoft
+    int sum2 = db.Users.Where(u=>u.Company!.Name == "Microsoft")
+                        .Sum(u => u.Age);
+
+    Console.WriteLine("Суммарный возраст всех пользователей");
+    Console.WriteLine(sum1);
+    Console.WriteLine("Суммарный возраст тех, кто работает в Microsoft");
+    Console.WriteLine(sum2);
 }
