@@ -148,3 +148,47 @@ using (ApplicationContext db = new ApplicationContext())
     }
     Scripts.SplitСonsole();
 }
+
+
+// Допустим, нам надо добавить в результат выборки название компании. Мы можем использовать метод Include для подсоединения
+// к объекту связанных данных из другой таблицы: var users = db.Users.Include(p=>p.Company). Но не всегда нужны все свойства
+// выбираемых объектов. В этом случае мы можем применить метод Select для проекции извлеченных данных на новый тип:
+using (ApplicationContext db = new ApplicationContext())
+{
+    var users1 = db.Users.Select(p => new
+    {
+        Name = p.Name,
+        Age = p.Age,
+        Company = p.Company!.Name
+    });
+    foreach (var user in users1)
+        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
+
+    // В даном случае мы получим данные анонимного типа, но это также может быть определенный пользователем тип.Например:
+    var users2 = db.Users.Select(p => new UserModel
+    {
+        Name = p.Name,
+        Age = p.Age,
+        Company = p.Company!.Name
+    });
+    foreach (UserModel user in users2)
+    {
+        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
+    }
+
+    // Для сортировки по убыванию применяется метод OrderByDescending():
+    var users3 = db.Users.OrderByDescending(u=>u.Name);
+    foreach (UserModel user in users2)
+    {
+        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
+    }
+
+    // При необходимости упорядочить данные сразу по нескольким критериям можно использовать методы ThenBy()(для сортировки
+    // по возрастанию) и ThenByDescending(). Например, отсортируем по двум значениям:
+    var users4 = db.Users.OrderBy(u => u.Age).ThenBy(u=>u.Company!.Name);
+    foreach (var user in users4)
+    {
+        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
+    }
+    Scripts.SplitСonsole();
+}
