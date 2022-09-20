@@ -9,6 +9,8 @@ namespace LINQtoEntities.Model
 
         public DbSet<Company> Companies { get; set; } = null!;
 
+        public DbSet<Country> Countries { get; set; } = null!;
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlite("Data Source = helloapp.db");

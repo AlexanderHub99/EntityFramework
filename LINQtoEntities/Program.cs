@@ -6,6 +6,8 @@ Console.WriteLine("Hello, World!");
 // Добавляем данные в базу данных
 using (ApplicationContext db = new ApplicationContext())
 {
+    Console.WriteLine("Добавляем данные в базу данных");
+
     await db.Database.EnsureDeletedAsync();
     await db.Database.EnsureCreatedAsync();
 
@@ -20,6 +22,7 @@ using (ApplicationContext db = new ApplicationContext())
 
     await db.Users.AddRangeAsync(tom, kate, bob, alice);
     await db.SaveChangesAsync();
+    Scripts.SplitСonsole();
 }
 
 using (ApplicationContext db = new ApplicationContext())
@@ -28,6 +31,7 @@ using (ApplicationContext db = new ApplicationContext())
                        where user.CompanyId == 1          // Выполняет фильтрацию последовательности значений на основе заданного предиката.
                        select user).ToListAsync();        // Асинхронное получение данных
 
+    Console.WriteLine("Вывод всех объектов с CompanyId == 1");
     foreach (var user in users)
     {
         Console.WriteLine($"{user.Name}({user.Age}) - {user.Company?.Name}");
@@ -43,6 +47,7 @@ using (ApplicationContext db = new ApplicationContext())
                         .Where(p => p.CompanyId == 2)     // Выполняет фильтрацию последовательности значений на основе заданного предиката.
                         .ToListAsync();                   // Асинхронное получение данных
 
+    Console.WriteLine("Вывод всех объектов с CompanyId == 2");
     foreach (var user in users)
     {
         Console.WriteLine($"{user.Name}({user.Age}) - {user.Company?.Name}");
@@ -85,6 +90,7 @@ using (ApplicationContext db = new ApplicationContext())
     // "Smith Tom"):
     var users = db.Users.Where(p => EF.Functions.Like(p.Name!, "%Tom%"));
 
+    Console.WriteLine("Вывод всех объектов с с совпадением  Tom");
     foreach (User user in users)
     {
         Console.WriteLine($"{user.Name} ({user.Age})");
@@ -100,6 +106,7 @@ using (ApplicationContext db = new ApplicationContext())
     // асинхронная версия
     // User? user = await db.Users.FindAsync(3); // выберем элемент с id=3
 
+    Console.WriteLine("Вывод всех объектов c id == 3");
     if (user != null) Console.WriteLine($"{user.Name} ({user.Age})");
 
     Scripts.SplitСonsole();
@@ -115,6 +122,7 @@ using (ApplicationContext db = new ApplicationContext())
                  where EF.Functions.Like(u.Age.ToString(), "2%")
                  select u;
 
+    Console.WriteLine("Вывод всех объектов  у которых возраст (свойство Age) в диапазоне от 20 до 29");
     foreach (User user in usersAge20_29)
     {
         Console.WriteLine($"{user.Name} ({user.Age})");
@@ -132,6 +140,8 @@ using (ApplicationContext db = new ApplicationContext())
 using (ApplicationContext db = new ApplicationContext())
 {
     User? user1 = db.Users.FirstOrDefault();
+
+    Console.WriteLine("Вывод первого объекта из таблице");
     // асинхронная версия
     // User? user = await db.Users.FirstOrDefaultAsync();
     if (user1 != null)
@@ -140,6 +150,8 @@ using (ApplicationContext db = new ApplicationContext())
     }
 
     User? user2 = db.Users.FirstOrDefault(p=>p.Id==3);
+
+    Console.WriteLine("Вывод объекта с Id==3");
     // асинхронная версия
     // User? user = await db.Users.FirstOrDefaultAsync(p=>p.Id==3);
     if (user2 != null)
@@ -161,9 +173,14 @@ using (ApplicationContext db = new ApplicationContext())
         Age = p.Age,
         Company = p.Company!.Name
     });
-    foreach (var user in users1)
-        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
 
+    Console.WriteLine("Вывод нового объекта с помощью метода Select");
+    foreach (var user in users1)
+    {
+        Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
+    }
+
+    Console.WriteLine("Вывод нового объекта с помощью метода Select");
     // В даном случае мы получим данные анонимного типа, но это также может быть определенный пользователем тип.Например:
     var users2 = db.Users.Select(p => new UserModel
     {
@@ -176,6 +193,7 @@ using (ApplicationContext db = new ApplicationContext())
         Console.WriteLine($"{user.Name} ({user.Age}) - {user.Company}");
     }
 
+    Console.WriteLine("Вывод по убыванию применяется метод OrderByDescending()");
     // Для сортировки по убыванию применяется метод OrderByDescending():
     var users3 = db.Users.OrderByDescending(u=>u.Name);
     foreach (UserModel user in users2)
@@ -192,3 +210,108 @@ using (ApplicationContext db = new ApplicationContext())
     }
     Scripts.SplitСonsole();
 }
+
+// Соединение и группировка таблиц
+using (ApplicationContext db = new ApplicationContext())
+{
+    var users = db.Users.Join(db.Companies, // второй набор
+        u => u.CompanyId, // свойство-селектор объекта из первого набора
+        c => c.Id, // свойство-селектор объекта из второго набора
+        (u, c) => new // результат
+        {
+            Name=u.Name,
+            Company = c.Name,
+            Age=u.Age
+        });
+    // Метод Join принимает четыре параметра:
+    // вторую таблицу, которая соединяется с текущей
+    // свойство объекта - столбец из первой таблицы, по которому идет соединение
+    // свойство объекта -столбец из второй таблицы, по которому идет соединение
+    // новый объект, который получается в результате соединения
+    // В итоге данный запрос будет транслироваться в следующее выражение SQL:
+    // SELECT "u"."Name", "c"."Name" AS "Company", "u"."Age"
+    // FROM "Users" AS "u"
+    // INNER JOIN "Companies" AS "c" ON "u"."CompanyId" = "c"."Id"
+
+    Console.WriteLine("Вывод cоединенных и группированных таблиц");
+    foreach (var u in users)
+    {
+        Console.WriteLine($"{u.Name} ({u.Company}) - {u.Age}");
+    }
+    Scripts.SplitСonsole();
+}
+
+// Объединим три таблицы в один набор:
+using (ApplicationContext db = new ApplicationContext())
+{
+    // пересоздаем базу данных
+    db.Database.EnsureDeleted();
+    db.Database.EnsureCreated();
+
+    Country usa = new Country { Name = "USA" };
+
+    Company microsoft = new Company { Name = "Microsoft", Country = usa };
+    Company google = new Company { Name = "Google", Country = usa };
+    db.Companies.AddRange(microsoft, google);
+
+    User tom = new User { Name = "Tom", Age = 36, Company = microsoft };
+    User bob = new User { Name = "Bob", Age = 39, Company = google };
+    User alice = new User { Name = "Alice", Age = 28, Company = microsoft };
+    User kate = new User { Name = "Kate", Age = 25, Company = google };
+
+    db.Users.AddRange(tom, bob, alice, kate);
+    db.SaveChanges();
+}
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    var users = from user in db.Users
+                join company in db.Companies on user.CompanyId equals company.Id
+                join country in db.Countries on company.CountryId equals country.Id
+                select new
+                {
+                    Name = user.Name,
+                    Company = company.Name,
+                    Age = user.Age,
+                    Country = country.Name
+                };
+
+    Console.WriteLine("Вывод объединенных три таблицы в один набор:");
+    foreach (var u in users)
+    {
+        Console.WriteLine($"{u.Name} ({u.Company} - {u.Country}) - {u.Age}");
+    }
+    Scripts.SplitСonsole();
+}
+
+// Группировка
+using (ApplicationContext db = new ApplicationContext())
+{
+    var  groups = from u in db.Users
+                  group u by u.Company!.Name into g
+                  select new
+                  {
+                      g.Key,
+                      Count = g.Count()
+                  };
+    foreach (var group in groups)
+    {
+        Console.WriteLine($"{group.Key} - {group.Count}");
+    }
+
+
+    // Аналогично работает метод GroupBy():
+    var groups2 = db.Users.GroupBy(u => u.Company!.Name).Select(g => new
+    {
+        g.Key,
+        Count = g.Count()
+    });
+
+    Console.WriteLine("Вывод группировки:");
+    foreach (var group in groups2)
+    {
+        Console.WriteLine($"{group.Key} - {group.Count}");
+    }
+    Scripts.SplitСonsole();
+}
+
