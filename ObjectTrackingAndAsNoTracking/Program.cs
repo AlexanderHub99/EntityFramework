@@ -89,3 +89,53 @@ using (ApplicationContext db = new ApplicationContext())
     int count = db.ChangeTracker.Entries().Count();
     Console.WriteLine($"{count}");
 }
+
+// Отслеживаемые запросы:
+using (ApplicationContext db = new ApplicationContext())
+{
+    var user1 = db.Users.FirstOrDefault();
+    var user2 = db.Users.FirstOrDefault();
+    if (user1 != null && user2 != null)
+    {
+        Console.WriteLine($"Before User1: {user1.Name}   User2: {user2.Name}");
+
+        user1.Name = "Bob";
+
+        Console.WriteLine($"After User1: {user1.Name}   User2: {user2.Name}");
+    }
+}
+
+// Консольный вывод:
+// Before User1: Tom   User2: Tom
+// After User1: Bob   User2: Bob
+
+// Так как запрос db.Users.FirstOrDefault() является отслеживаемым, то при получении данных, по ним будет создаваться
+// объект user1, который добавляется в контекст и начинает отслеживаться.
+
+// Далее повторно вызывается данный запрос для получения объекта user2. Этот запрос то же является отслеживаемым,
+// поэтому EF увидит, что такой объект уже есть в контексте, он уже отслеживается, и возвратит ссылку на тот же объект. Поэтому все изменения с переменной user1 затронут и переменную user2.
+
+// Рассмотрим другой пример:
+using (ApplicationContext db = new ApplicationContext())
+{
+    var user1 = db.Users.FirstOrDefault();
+    var user2 = db.Users.AsNoTracking().FirstOrDefault();
+
+    if (user1 != null && user2 != null)
+    {
+        Console.WriteLine($"Before User1: {user1.Name}   User2: {user2.Name}");
+
+        user1.Name = "Bob";
+
+        Console.WriteLine($"After User1: {user1.Name}   User2: {user2.Name}");
+    }
+}
+
+// Консольный вывод:
+
+// Before User1: Tom   User2: Tom
+// After User1: Bob   User2: Tom
+// С первым объектом user1 все по прежнему: он также попадает в контекст и отслеживается. А вот второй запрос теперь
+// является неотслеживаемым, так как использует метод AsNoTracking. Поэтому для данных, полученных в результате этого
+// запроса, будет создаваться новый объект, который никак не будет связан с объектом user1. И изменения одного из
+// этих объектов никак не повлияют на второй объект.
