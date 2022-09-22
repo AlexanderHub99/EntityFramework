@@ -47,7 +47,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPH_TablePerHierarchy", "TP
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TPT_TablePerType", "TPT_Table Per Type\TPT_TablePerType.csproj", "{AC1F1893-80B3-4686-ADD6-0737187142E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LINQtoEntities", "LINQtoEntities\LINQtoEntities.csproj", "{ECB4F9CF-A415-467E-A1FD-6A2EED7C3FC5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LINQtoEntities", "LINQtoEntities\LINQtoEntities.csproj", "{ECB4F9CF-A415-467E-A1FD-6A2EED7C3FC5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ObjectTrackingAndAsNoTracking", "ObjectTrackingAndAsNoTracking\ObjectTrackingAndAsNoTracking.csproj", "{44DD2D4F-FC9D-4E08-B8D0-CBF5D1AE6CFD}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -147,6 +149,10 @@ Global
 		{ECB4F9CF-A415-467E-A1FD-6A2EED7C3FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ECB4F9CF-A415-467E-A1FD-6A2EED7C3FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ECB4F9CF-A415-467E-A1FD-6A2EED7C3FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{44DD2D4F-FC9D-4E08-B8D0-CBF5D1AE6CFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{44DD2D4F-FC9D-4E08-B8D0-CBF5D1AE6CFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{44DD2D4F-FC9D-4E08-B8D0-CBF5D1AE6CFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{44DD2D4F-FC9D-4E08-B8D0-CBF5D1AE6CFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
