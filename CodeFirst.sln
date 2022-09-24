@@ -53,6 +53,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ObjectTrackingAndAsNoTracki
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SQLinEntityFrameworkCore", "SQLinEntityFrameworkCore\SQLinEntityFrameworkCore.csproj", "{9AF609BA-849A-4316-A40C-51B6029E4AA4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StoredFunctionsMS_SQL_Server.", "StoredFunctionsMS_SQL_Server\StoredFunctionsMS_SQL_Server..csproj", "{2D2403C0-CB46-4207-823B-187C4C58153A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -159,6 +161,10 @@ Global
 		{9AF609BA-849A-4316-A40C-51B6029E4AA4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AF609BA-849A-4316-A40C-51B6029E4AA4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AF609BA-849A-4316-A40C-51B6029E4AA4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2D2403C0-CB46-4207-823B-187C4C58153A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2D2403C0-CB46-4207-823B-187C4C58153A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2D2403C0-CB46-4207-823B-187C4C58153A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2D2403C0-CB46-4207-823B-187C4C58153A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
