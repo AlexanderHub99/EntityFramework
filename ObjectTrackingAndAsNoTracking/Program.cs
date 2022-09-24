@@ -10,12 +10,14 @@ using (ApplicationContext db = new ApplicationContext())
     db.Database.EnsureDeleted();
     db.Database.EnsureCreated();
 
+    User ka = new User { Name = "Ka", Age = 17 };
     User tom = new User { Name = "Tom", Age = 36};
+    User kat = new User { Name = "Kat", Age = 19 };
     User bob = new User { Name = "Bob", Age = 39 };
-    User alice = new User { Name = "Alice", Age = 28 };
     User kate = new User { Name = "Kate", Age = 25 };
+    User alice = new User { Name = "Alice", Age = 28 };
 
-    db.Users.AddRange(tom, bob, alice, kate);
+    db.Users.AddRange(tom, bob, alice, kate, kat, ka);
     db.SaveChanges();
 }
 
@@ -207,4 +209,33 @@ using (ApplicationContext db = new ApplicationContext())
     // WHERE("u"."Id" < 10) AND("u"."Name" = 'Tom')
 
     foreach (var user in users) Console.WriteLine(user.Name);
+}
+
+using (ApplicationContext db = new ApplicationContext() { UserAge = 25 })
+{
+    var users = db.Users.Include(u => u.Age).ToList();
+    foreach (User user in users)
+        Console.WriteLine($"Name: {user.Name}  Age: {user.Age}");
+    //Результатом будет следующий консольный вывод:
+    // Name: Alice     Age:19      Role: admin
+    // Name: Sam       Age:20      Role: admin
+    // То есть только два объекта из добавленных четырех соответствуют тому предикату, который был
+    // передан в HasQueryFilter. И данный фильтр будет действовать для всех запросов к базе данных,
+    // которые извлекают данные из таблицы Users. Например, нахождение минимального возраста:
+}
+
+using (ApplicationContext db = new ApplicationContext() { UserAge = 2 })
+{
+    int minAge = db.Users.Min(x => x.Age);
+    Console.WriteLine(minAge);  // 19
+}
+
+// Несмотря на то, что минимальный возраст по всем 4 объектам составляет 17, но так как действует
+// фильтр, при запросе будут учитываться только те объекты в бд, которые соответствуют фильтру.
+
+// Если необходимо во время запроса отключить фильтр, то применяется метод IgnoreQueryFilters():
+using (ApplicationContext db = new ApplicationContext() { UserAge = 2 })
+{
+    int minAge = db.Users.IgnoreQueryFilters().Min(x => x.Age);
+    Console.WriteLine(minAge);  // 17
 }
