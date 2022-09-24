@@ -1,0 +1,163 @@
+﻿using Microsoft.Data.Sqlite;
+using Microsoft.EntityFrameworkCore;
+using SQLinEntityFrameworkCore.Model;
+
+Console.WriteLine("Hello, World!");
+
+// Кроме использования инфраструктуры LINQ to Entities для создания запросов Entity Framework Core также позволяет
+// писать запросы к базе данных сразу на языке SQL. Это может быть удобно, если запрос очень сложный по своей
+// структуре или если Entity Framework Core на основе Linq to Entities создает не очень оптимальный sql-запрос.
+
+// FromSqlRaw
+// Для получения данных из БД у объектов DbSet определен метод FromSqlRaw(), который принимает в качестве параметра
+// sql-выражение и набор параметров. В качестве результата FromSqlRaw возвращает набор полученных из бд объектов.
+
+// При этом надо учитывать, что передаваемое в метод FromSqlRaw SQL-выражение не должно извлекать связанные данные,
+// а полученные значения должны соответствовать определению какого-либо класса.
+
+// Пусть ранее у нас были добавлены следующие данные:
+using (ApplicationContext db = new ApplicationContext())
+{
+    // пересоздаем базу данных
+    db.Database.EnsureDeleted();
+    db.Database.EnsureCreated();
+
+    Company microsoft = new Company { Name = "Microsoft"};
+    Company google = new Company { Name = "Google"};
+    db.Companies.AddRange(microsoft, google);
+
+    User tom = new User { Name = "Tom", Age = 36, Company = microsoft };
+    User bob = new User { Name = "Bob", Age = 39, Company = google };
+    User alice = new User { Name = "Alice", Age = 28, Company = microsoft };
+    User kate = new User { Name = "Kate", Age = 25, Company = google };
+    User tomas = new User { Name = "Tomas", Age = 22, Company = microsoft };
+    User tomek = new User { Name = "Tomek", Age = 42, Company = google };
+
+    db.Users.AddRange(tom, bob, alice, kate, tomas, tomek);
+    db.SaveChanges();
+}
+
+// Например, получим все объекты из таблицы Companies:
+using (ApplicationContext db = new ApplicationContext())
+{
+    var comps = db.Companies.FromSqlRaw("SELECT * FROM Companies").ToList();
+    // Выражение SELECT извлекает данные из таблицы. Так как эта таблица сопоставляется с моделью Company и хранит объекты
+    // этой модели, то в результате мы получим набор объектов класса Company.
+
+    // При этом мы можем добавлять к методу другие методы LINQ, которые все вместе будут конкатенироваться в одно общее
+    // SQL-выражение:
+    // var comps = db.Companies.FromSqlRaw("SELECT * FROM Companies").OrderBy(x=>x.Name).ToList();
+    // В итоге будет выполняться следующее SQL-выражение
+    // SELECT "c"."Id", "c"."Name"
+    // FROM(SELECT * FROM Companies) AS "c"
+    // ORDER BY "c"."Name"
+    foreach (var company in comps)
+    {
+        Console.WriteLine(company.Name);
+    }
+    // Также можно использовать метод Include для подгрузки связанных данных:           k
+    var users = db.Users.FromSqlRaw("SELECT * FROM Users")
+                        .Include(c=>c.Company).ToList();
+    foreach (var user in users)
+    {
+        Console.WriteLine($"{user.Name} - {user.Company?.Name}");
+    }
+}
+
+// Параметры
+// Другая версия метода FromSqlRaw() позволяет использовать параметры. Например, выберем из бд все модели, в названии
+// которых есть подстрока "Tom":
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    SqliteParameter param = new SqliteParameter("@name", "%Tom%");
+    var users = db.Users.FromSqlRaw("SELECT * FROM Users WHERE Name LIKE @name", param).ToList();
+
+    foreach (var user in users)
+    {
+        Console.WriteLine(user.Name);
+    }
+}
+
+// Поскольку выше приведенный контекст данных подключается к бд SQLite, то для представления параметров применяется
+// тип SqliteParameter из пространства имен Microsoft.Data.Sqlite. Конструктор SqliteParameter имеет ряд версий.
+// В данном случае в конструктор передается два параметра. Первый параметр - название параметра, через который на
+// него можно ссылаться в строке запроса - в данном случае "@name". Второй параметр - значение параметра.
+
+// Если бы подключение шло к бд MS SQL Server, то для представления параметров применялся бы класс SqlParameter
+// из пространства имен Microsoft.Data.SqlClient:
+using (ApplicationContext db = new ApplicationContext())
+{
+    SqliteParameter param = new SqliteParameter("@name", "%Tom%");
+    var users = db.Users.FromSqlRaw("SELECT * FROM Users WHERE Name LIKE @name", param).ToList();
+    foreach (var user in users)
+        Console.WriteLine(user.Name);
+}
+
+// Также мы можем определять параметры как простые переменные:
+using (ApplicationContext db = new ApplicationContext())
+{
+    var name = "%Tom%";
+    var users = db.Users.FromSqlRaw("SELECT * FROM Users WHERE Name LIKE {0}", name).ToList();
+    foreach (var user in users)
+        Console.WriteLine(user.Name);
+
+    var age = 30;
+    users = db.Users.FromSqlRaw("SELECT * FROM Users WHERE Age > {0}", age).ToList();
+    foreach (var user in users)
+        Console.WriteLine(user.Name);
+}
+
+// ExecuteSqlRaw
+// Метод FromSqlRaw() осуществляет выборку из БД, но кроме выборки нам, возможно, придется удалять, обновлять
+// уже существующие или вставлять новые записи. Для этой цели применяется метод ExecuteSqlRaw() и его 
+// асинхронная версия - ExecuteSqlRawAsync(), которые возвращают количество затронутых командой строк.
+// Для его вызова у контекста данных используется свойство Database:
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    // вставка
+    string newComp = "Apple";
+    int numberOfRowInserted = db.Database.ExecuteSqlRaw("INSERT INTO Companies (Name) VALUES ({0})", newComp);
+    // асинхронная версия
+    // int numberOfRowInserted2 = await db.Database.ExecuteSqlRawAsync("INSERT INTO Companies (Name) VALUES ({0})", newComp);
+
+
+    // обновление
+    string appleInc = "Apple Inc.";
+    string apple = "Apple";
+    int numberOfRowUpdated = db.Database.ExecuteSqlRaw("UPDATE Companies SET Name={0} WHERE Name={1}", appleInc, apple);
+
+    // удаление
+    int numberOfRowDeleted = db.Database.ExecuteSqlRaw("DELETE FROM Companies WHERE Name={0}", appleInc);
+}
+
+// Интерполяция строк
+// Для методов FromSqlRaw и ExecuteSqlRaw в EF Core определены их двойники - методы FromSqlInterpolated() и ExecuteSqlInterpolated()
+// (асинхронная версия - ExecuteSqlInterpolatedAsync()), которые позволяют использовать интерполяцию строк для передачи параметров.
+// Пример с FromSqlInterpolated:
+
+using (ApplicationContext db = new ApplicationContext())
+{
+    var name = "%Tom%";
+    var age = 30;
+    var users = db.Users.FromSqlInterpolated($"SELECT * FROM Users WHERE Name LIKE {name} AND Age > {age}").ToList();
+    foreach (var user in users)
+        Console.WriteLine(user.Name);
+}
+
+// @p0='%Tom%'
+// @p1 = 30
+// SELECT * FROM Users WHERE Name LIKE @p0 AND Age > @p1
+
+// Использование ExecuteSqlInterpolated()/ExecuteSqlInterpolatedAsync():
+using (ApplicationContext db = new ApplicationContext())
+{
+    string jetbrains = "JetBrains";
+    db.Database.ExecuteSqlInterpolated($"INSERT INTO Companies (Name) VALUES ({jetbrains})");
+    // асинхронная версия
+    // await db.Database.ExecuteSqlInterpolatedAsync($"INSERT INTO Companies (Name) VALUES ({jetbrains})");
+
+    foreach (var comp in db.Companies.ToList())
+        Console.WriteLine(comp.Name);
+}
