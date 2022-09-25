@@ -5,7 +5,7 @@ using StoredProcedures.Model;
 Console.WriteLine("Hello, World!");
 
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
 
     // Добавление данных 
