@@ -28,7 +28,7 @@ using (ApplicationContext db = new())
     }
 }
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     SqlParameter param = new()
     {
