@@ -2,7 +2,7 @@
 
 Console.WriteLine("Hello, World!");
 
-using (ApplicationContext db = new ApplicationContext())
+using (ApplicationContext db = new())
 {
     User user1 = new User { Name = "Tom" };
     User user2 = new User { Name = "Bob" };
